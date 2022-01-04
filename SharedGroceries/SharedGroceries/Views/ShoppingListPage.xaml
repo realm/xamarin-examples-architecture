@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<local:BasePage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:SharedGroceries.Views"
+    x:Class="SharedGroceries.Views.ShoppingListPage"
+    x:Name="page">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Delete" Command="{Binding DeleteCommand}" Order="Primary" IsDestructive="True"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Orientation="Vertical" Margin="20" Spacing="10">
+                <Editor Text="{Binding ShoppingList.Name}" HorizontalOptions="Fill"
+                        Placeholder="Shopping List Name"/>
+                <StackLayout BindableLayout.ItemsSource="{Binding UncheckedItems}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Orientation="Horizontal">
+                                <CheckBox IsChecked="{Binding Purchased}" VerticalOptions="Center"  />
+                                <Entry Text="{Binding Name}"
+                                       Keyboard="Email"
+                                       HorizontalOptions="FillAndExpand"
+                                       VerticalOptions="Center"/>
+                                <Button Text="X" FontSize="Title"
+								    Command="{Binding Path=BindingContext.DeleteItemCommand, Source={x:Reference page}}"
+                                    CommandParameter="{Binding .}"/>
+                            </StackLayout>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+                <Button Text="+ Add Item" Command="{Binding AddItemCommand}"/>
+                <BoxView Color="Gray" HeightRequest="1"/>
+                <Label Text="{Binding CheckedItems.Count, StringFormat='{0} ticked'}"/>
+                <StackLayout BindableLayout.ItemsSource="{Binding CheckedItems}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Orientation="Horizontal">
+                                <CheckBox IsChecked="{Binding Purchased}" VerticalOptions="Center"  />
+                                <Label Text="{Binding Name}" TextDecorations="Strikethrough"
+                                       HorizontalOptions="FillAndExpand"
+                                       VerticalOptions="Center"/>
+                                <Button Text="X" FontSize="Title"
+								    Command="{Binding Path=BindingContext.DeleteItemCommand, Source={x:Reference page}}"
+                                    CommandParameter="{Binding .}"/>
+                            </StackLayout>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</local:BasePage>

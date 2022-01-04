@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<local:BasePage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:SharedGroceries.Views"
+    x:Class="SharedGroceries.Views.LoginPage">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical"
+                     VerticalOptions="Center"
+                     Padding="25">
+            <Label Text="SharedGroceries" FontSize="Title"
+                   HorizontalOptions="Center"
+                   Margin="0, 0, 0, 150"/>
+            <Entry Placeholder="Username" Text="{Binding Username}"/>
+            <Entry Placeholder="Password" Text="{Binding Password}" />
+            <Button Text="Login" Command="{Binding LoginCommand}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</local:BasePage>
